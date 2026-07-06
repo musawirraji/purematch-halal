@@ -7,7 +7,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { route } from "@shared/navigation/routes";
 import { IconArrow } from "@shared/components/icons";
-import { mobileReveal } from "@shared/lib/scrollReveal";
+import { mobileReveal, onInView } from "@shared/lib/scrollReveal";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -40,17 +40,13 @@ export function EventsScene() {
         set(a.current, 0);
         set(b.current, 0);
         set(c.current, 0);
-        const counter = ScrollTrigger.create({
-          trigger: ".pm-ev__stats",
-          start: "top 82%",
-          once: true,
-          onEnter: () =>
-            gsap.to(n, {
-              a: 400, b: 80, c: 59, duration: 1.8, ease: "power2.out",
-              onUpdate: () => { set(a.current, n.a); set(b.current, n.b); set(c.current, n.c); },
-            }),
-        });
-        return () => { revert(); counter.kill(); };
+        const stopCounter = onInView(root.current?.querySelector(".pm-ev__stats") ?? null, () =>
+          gsap.to(n, {
+            a: 400, b: 80, c: 59, duration: 1.8, ease: "power2.out",
+            onUpdate: () => { set(a.current, n.a); set(b.current, n.b); set(c.current, n.c); },
+          })
+        );
+        return () => { revert(); stopCounter(); };
       });
 
       mm.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {

@@ -25,7 +25,7 @@ export function JourneyPinned() {
 
       // Mobile: the steps stack vertically — reveal each panel as it enters view.
       mm.add("(max-width: 1023px) and (prefers-reduced-motion: no-preference)", () =>
-        mobileReveal(section.current, ".pm-journey__panel", { start: "top 85%", stagger: 0 })
+        mobileReveal(section.current, ".pm-journey__panel", { stagger: 0 })
       );
 
       mm.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {

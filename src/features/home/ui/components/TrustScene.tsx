@@ -42,11 +42,12 @@ export function TrustScene() {
     () => {
       const mm = gsap.matchMedia();
 
-      // Mobile: stacked + static bg — reveal the intro and each safeguard in view.
+      // Mobile: stacked on ink (intro is display:none there) — reveal the held
+      // card, then the heading + each safeguard as they enter view.
       mm.add("(max-width: 1023px) and (prefers-reduced-motion: no-preference)", () =>
         mobileReveal(
           root.current,
-          ".pm-tx__intro, .pm-tx__fkicker, .pm-tx__fhead, .pm-tx__fdesc, .pm-tx__feature",
+          ".pm-tx__object, .pm-tx__fkicker, .pm-tx__fhead, .pm-tx__fdesc, .pm-tx__feature",
           { stagger: 0.08 }
         )
       );
