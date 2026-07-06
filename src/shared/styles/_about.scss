@@ -1,3 +1,159 @@
 @use "tokens" as *;
 
-// about page styles (filled during feature build)
+// =============================================================================
+// ABOUT PAGE
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Showreel hero — adapted from Exo Ape: full-bleed dark stage, oversized
+// line-mask title (overflow-hidden mask + inner line sliding up), wide media
+// plate that expands (clip-path) on scroll.
+// -----------------------------------------------------------------------------
+.pm-reel {
+  position: relative;
+  background: var(--pm-ink-900);
+  color: var(--pm-paper);
+  padding: calc(var(--pm-header-h) + clamp(3rem, 8vh, 6rem)) var(--pm-edge) clamp(3rem, 8vh, 6rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp($pm-space-7, 6vh, $pm-space-9);
+  overflow: hidden;
+}
+.pm-reel__head { max-width: 60rem; }
+.pm-reel__label { color: var(--pm-accent); margin-bottom: $pm-space-5; }
+.pm-reel__title {
+  @include pm-display;
+  font-weight: 500;
+  font-size: clamp(3.2rem, 1.5rem + 8vw, 10rem);
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+// each line lives in an overflow-hidden mask; the inner line slides up
+.pm-reel__mask { display: block; overflow: hidden; padding-bottom: 0.04em; }
+.pm-reel__line { display: block; will-change: transform; }
+.pm-reel__mask:last-child .pm-reel__line { color: var(--pm-accent); } // second line = pink
+.pm-reel__body {
+  margin-top: clamp($pm-space-5, 3vh, $pm-space-7);
+  max-width: 44rem;
+  font-size: $pm-step-1;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--pm-paper) 80%, transparent);
+}
+
+// wide media plate
+.pm-reel__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  @include bp(md) { aspect-ratio: 21 / 9; }
+}
+
+// scroll hint
+.pm-reel__scroll {
+  display: inline-flex;
+  align-items: center;
+  gap: $pm-space-2;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--pm-paper) 60%, transparent);
+}
+.pm-reel__scroll-i { width: 1rem; height: 1rem; color: var(--pm-accent); animation: pm-reel-bob 1.8s ease-in-out infinite; }
+@keyframes pm-reel-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+@include pm-reduce-motion {
+  .pm-reel__scroll-i { animation: none; }
+}
+
+// -----------------------------------------------------------------------------
+// Founder's letter — editorial two-column, sticky portrait + drop-cap letter.
+// -----------------------------------------------------------------------------
+.pm-astory { background: var(--pm-paper); }
+.pm-astory__inner {
+  padding-inline: var(--pm-edge);
+  display: grid;
+  gap: $pm-space-7;
+  grid-template-columns: 1fr; // mobile
+  @include bp(lg) {
+    grid-template-columns: 0.78fr 1fr;
+    gap: clamp($pm-space-8, 5vw, $pm-space-9);
+    align-items: start;
+  }
+}
+
+// portrait — sticky while the letter scrolls (desktop)
+.pm-astory__portrait { margin: 0; min-width: 0; }
+.pm-astory__frame { position: relative; aspect-ratio: 4 / 5; }
+@include bp(lg) {
+  .pm-astory__portrait {
+    position: sticky;
+    top: calc(var(--pm-header-h) + #{$pm-space-6});
+    display: flex;
+    flex-direction: column;
+  }
+  .pm-astory__frame { flex: 1 1 auto; min-height: 0; }
+}
+.pm-astory__cap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: $pm-space-3;
+  padding-top: $pm-space-3;
+  border-top: 1px solid var(--pm-line);
+}
+.pm-astory__capname {
+  font-family: var(--pm-font-display);
+  font-weight: 600;
+  font-size: $pm-step-1;
+  color: var(--pm-ink-strong);
+}
+.pm-astory__caprole {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pm-ink-muted);
+}
+
+// letter column
+.pm-astory__text {
+  display: flex;
+  flex-direction: column;
+  gap: $pm-space-5;
+  max-width: 46rem;
+}
+.pm-astory__kicker { color: var(--pm-accent); margin: 0; }
+.pm-astory__heading {
+  @include pm-display;
+  font-weight: 500;
+  font-size: clamp(2rem, 1.2rem + 2.6vw, 3.4rem);
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+  color: var(--pm-ink-strong);
+  text-wrap: balance;
+  margin: 0;
+}
+.pm-astory__p {
+  font-size: $pm-step-1;
+  line-height: 1.62;
+  color: var(--pm-ink-body);
+}
+.pm-astory__p--lede {
+  color: var(--pm-ink-strong);
+  &::first-letter {
+    float: left;
+    font-family: var(--pm-font-display);
+    font-weight: 600;
+    font-size: 3.2em;
+    line-height: 0.72;
+    padding: 0.04em 0.12em 0 0;
+    color: var(--pm-accent);
+  }
+}
+.pm-astory__sign {
+  font-family: var(--pm-font-display);
+  font-weight: 500;
+  font-size: $pm-step-2;
+  color: var(--pm-ink-strong);
+  margin-top: $pm-space-3;
+}
