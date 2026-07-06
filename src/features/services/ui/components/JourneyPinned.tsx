@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MediaFrame } from "@shared/components/MediaFrame";
+import { mobileReveal } from "@shared/lib/scrollReveal";
 import { JOURNEY } from "../../domain/content";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -21,6 +22,12 @@ export function JourneyPinned() {
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
+
+      // Mobile: the steps stack vertically — reveal each panel as it enters view.
+      mm.add("(max-width: 1023px) and (prefers-reduced-motion: no-preference)", () =>
+        mobileReveal(section.current, ".pm-journey__panel", { start: "top 85%", stagger: 0 })
+      );
+
       mm.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
         const el = track.current!;
         const amount = () => Math.max(0, el.scrollWidth - window.innerWidth);

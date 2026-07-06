@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { mobileReveal } from "@shared/lib/scrollReveal";
 import { TESTIMONIALS } from "../../domain/content";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -20,6 +21,12 @@ export function Testimonials() {
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
+
+      // Mobile: no char-flip — reveal the heading and cards in view.
+      mm.add("(max-width: 1023px) and (prefers-reduced-motion: no-preference)", () =>
+        mobileReveal(root.current, ".pm-testi__head, .pm-testi__card", { stagger: 0.12 })
+      );
+
       mm.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
         gsap.fromTo(
           ".pm-testi__char",

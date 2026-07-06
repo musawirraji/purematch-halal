@@ -7,6 +7,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { route } from "@shared/navigation/routes";
 import { IconArrow } from "@shared/components/icons";
+import { mobileReveal } from "@shared/lib/scrollReveal";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -38,6 +39,16 @@ export function CinematicScene() {
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
+
+      // Mobile: the two panels stack — reveal each block in view (no pin/zoom).
+      mm.add("(max-width: 1023px) and (prefers-reduced-motion: no-preference)", () =>
+        mobileReveal(
+          root.current,
+          ".pm-cine__copy, .pm-cine__lk, .pm-cine__ln, .pm-cine__lb, .pm-cine__lm",
+          { stagger: 0.08 }
+        )
+      );
+
       mm.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
         const tl = gsap.timeline({
           defaults: { ease: "none" },

@@ -7,6 +7,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { route } from "@shared/navigation/routes";
 import { IconArrow } from "@shared/components/icons";
+import { mobileReveal } from "@shared/lib/scrollReveal";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -22,11 +23,37 @@ export function EventsScene() {
 
   useGSAP(
     () => {
+      const set = (el: HTMLSpanElement | null, v: number) => {
+        if (el) el.textContent = String(Math.round(v));
+      };
       const mm = gsap.matchMedia();
+
+      // Mobile: no pin/scrub — blocks reveal in view and the counter runs itself
+      // once the stats scroll into view.
+      mm.add("(max-width: 1023px) and (prefers-reduced-motion: no-preference)", () => {
+        const revert = mobileReveal(
+          root.current,
+          ".pm-ev__kicker, .pm-ev__intro, .pm-ev__stat, .pm-ev__badges, .pm-ev__partner, .pm-ev__cta",
+          { stagger: 0.08 }
+        );
+        const n = { a: 0, b: 0, c: 0 };
+        set(a.current, 0);
+        set(b.current, 0);
+        set(c.current, 0);
+        const counter = ScrollTrigger.create({
+          trigger: ".pm-ev__stats",
+          start: "top 82%",
+          once: true,
+          onEnter: () =>
+            gsap.to(n, {
+              a: 400, b: 80, c: 59, duration: 1.8, ease: "power2.out",
+              onUpdate: () => { set(a.current, n.a); set(b.current, n.b); set(c.current, n.c); },
+            }),
+        });
+        return () => { revert(); counter.kill(); };
+      });
+
       mm.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
-        const set = (el: HTMLSpanElement | null, v: number) => {
-          if (el) el.textContent = String(Math.round(v));
-        };
         const n = { a: 0, b: 0, c: 0 };
         const tl = gsap.timeline({
           defaults: { ease: "none" },

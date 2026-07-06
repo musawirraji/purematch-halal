@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { IconShield, IconCheck, IconConsent, IconRings } from "@shared/components/icons";
+import { mobileReveal } from "@shared/lib/scrollReveal";
 import { TRUST } from "../../domain/content";
 import type { TrustFeature } from "../../domain/content";
 
@@ -40,6 +41,16 @@ export function TrustScene() {
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
+
+      // Mobile: stacked + static bg — reveal the intro and each safeguard in view.
+      mm.add("(max-width: 1023px) and (prefers-reduced-motion: no-preference)", () =>
+        mobileReveal(
+          root.current,
+          ".pm-tx__intro, .pm-tx__fkicker, .pm-tx__fhead, .pm-tx__fdesc, .pm-tx__feature",
+          { stagger: 0.08 }
+        )
+      );
+
       mm.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
         const tl = gsap.timeline({
           defaults: { ease: "none" },
