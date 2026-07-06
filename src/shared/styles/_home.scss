@@ -893,27 +893,141 @@ $hero-pad: var(--pm-edge); // inside the frame; matches header/annbar gutter
 }
 
 // =============================================================================
-// CTA BANNER
+// CTA — final stacking card. Full-bleed dark "invitation" finale: pink corner
+// frame (bookends the hero) + a living pink glow, centred copy + actions.
 // =============================================================================
-.pm-ctabanner__card {
-  border-radius: $pm-radius-lg;
-  padding: clamp(2.5rem, 6vw, 5rem);
+.pm-cta {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--pm-ink-900);
+  color: var(--pm-paper);
+  min-height: 84svh; // mobile presence (desktop card forces 100svh)
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+// Living background — breathing pink glows
+.pm-cta__bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.pm-cta__glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  mix-blend-mode: screen;
+  &--1 {
+    width: 62vw; height: 62vw; left: 50%; top: 42%; margin: -31vw 0 0 -31vw;
+    background: radial-gradient(closest-side, rgba(232, 81, 123, 0.42), transparent 70%);
+    animation: pm-glow-breathe 12s ease-in-out infinite alternate;
+  }
+  &--2 {
+    width: 36vw; height: 36vw; right: -8vw; bottom: -10vw;
+    background: radial-gradient(closest-side, rgba(206, 62, 100, 0.34), transparent 70%);
+    animation: pm-glow-breathe 16s ease-in-out infinite alternate-reverse;
+  }
+}
+@keyframes pm-glow-breathe {
+  from { transform: scale(0.9); opacity: 0.55; }
+  to { transform: scale(1.14); opacity: 1; }
+}
+
+// Pink corner frame (echoes the hero)
+.pm-cta__frame { position: absolute; inset: clamp(1rem, 3vw, 2.4rem); z-index: 1; pointer-events: none; }
+.pm-cta__corner { position: absolute; width: 18px; height: 18px; border: solid var(--pm-accent); }
+.pm-cta__corner--tl { top: 0; left: 0; border-width: 1px 0 0 1px; }
+.pm-cta__corner--tr { top: 0; right: 0; border-width: 1px 1px 0 0; }
+.pm-cta__corner--bl { bottom: 0; left: 0; border-width: 0 0 1px 1px; }
+.pm-cta__corner--br { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
+
+// Centred content
+.pm-cta__inner {
+  position: relative;
+  z-index: 2;
+  padding-inline: var(--pm-edge);
+  max-width: 54rem;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  background:
-    radial-gradient(120% 120% at 50% 0%, rgba(232, 81, 123, 0.18), transparent 60%),
-    linear-gradient(160deg, var(--pm-paper-2), var(--pm-paper));
-  border: 1px solid var(--pm-hairline);
+  gap: clamp($pm-space-4, 2.4vh, $pm-space-6);
 }
-.pm-ctabanner__kicker { color: var(--pm-accent); }
-.pm-ctabanner__headline {
+.pm-cta__index {
+  font-family: var(--pm-font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--pm-paper) 52%, transparent);
+}
+.pm-cta__kicker { color: var(--pm-accent); margin: 0; }
+.pm-cta__headline {
   @include pm-display;
-  font-size: $pm-step-6;
-  color: var(--pm-ink-strong);
-  margin: $pm-space-3 0 $pm-space-4;
+  font-weight: 500;
+  font-size: clamp(2.6rem, 1.3rem + 5vw, 6rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--pm-paper);
+  text-wrap: balance;
+  margin: 0;
 }
-.pm-ctabanner__body {
+.pm-cta__body {
   font-size: $pm-step-1;
-  color: var(--pm-ink-body);
-  max-width: 34rem;
-  margin: 0 auto $pm-space-6;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--pm-paper) 80%, transparent);
+  max-width: 40rem;
+  margin: 0;
+}
+.pm-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: $pm-space-4 $pm-space-6;
+  margin-top: $pm-space-2;
+}
+.pm-cta__more {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--pm-font-body);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pm-paper);
+  padding-block: 0.4em;
+  transition: color $pm-dur-fast $pm-ease;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 100%; height: 1px;
+    background: currentColor;
+    transform: scaleX(1);
+    transform-origin: right;
+    transition: transform $pm-dur $pm-ease;
+  }
+  &:hover { color: var(--pm-accent); }
+  &:hover::after { transform: scaleX(0); transform-origin: left; }
+}
+.pm-cta__more-i { width: 1em; height: 1em; }
+.pm-cta__trust {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: $pm-space-2 $pm-space-6;
+  margin: $pm-space-3 0 0;
+  padding: 0;
+  li {
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--pm-paper) 58%, transparent);
+  }
+}
+
+@include pm-reduce-motion {
+  .pm-cta__glow { animation: none; }
 }

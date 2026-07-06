@@ -117,7 +117,10 @@ export const EVENT_TEASER = {
 
 export const CTA_BANNER = {
   kicker: "Complete half your deen",
-  headline: "Begin your application.",
-  body: "One match at a time. Never a queue. Begin the considered way to your nikkah.",
+  index: "§ — The invitation",
+  headline: "Your nikkah starts with a salaam.",
+  body: "One match at a time — never a queue. When you're ready, we'll make the considered introduction to the one you'll marry.",
   cta: "Begin Your Application",
+  secondary: "See how it works",
+  trust: ["Wali-friendly", "Human-vetted", "Discreet by design"],
 } as const;
