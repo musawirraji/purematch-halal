@@ -1,0 +1,133 @@
+@use "tokens" as *;
+
+// =============================================================================
+// Stack — scroll-stacking cards (Stack.tsx)
+// =============================================================================
+.pm-stack { position: relative; }
+.pm-stack__card {
+  position: relative; // mobile: normal flow
+  background: var(--pm-bg);
+}
+@media (min-width: 64rem) and (prefers-reduced-motion: no-preference) {
+  .pm-stack__card {
+    position: sticky;
+    top: 0;
+    min-height: 100svh;
+    overflow: hidden;
+    transform-origin: center center;
+    will-change: transform;
+  }
+  // inner section fills the card and centres its content
+  .pm-stack__card > * {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+  }
+}
+
+// =============================================================================
+// Badge — pm-badge
+// =============================================================================
+.pm-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: $pm-space-2;
+  @include pm-eyebrow;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  color: var(--pm-primary-deep);
+  background: var(--pm-pink-100);
+  padding: 0.55em 0.9em;
+  border-radius: $pm-radius-pill;
+}
+.pm-badge--accent { color: var(--pm-white); background: var(--pm-accent); }
+.pm-badge--outline {
+  color: var(--pm-ink-body);
+  background: transparent;
+  border: 1px solid var(--pm-hairline);
+}
+
+// =============================================================================
+// Card — pm-card
+// =============================================================================
+.pm-card {
+  background: var(--pm-surface);
+  border: 1px solid var(--pm-hairline);
+  border-radius: $pm-radius-lg;
+  padding: $pm-space-6;
+  display: flex;
+  flex-direction: column;
+  gap: $pm-space-3;
+  max-width: 22rem;
+  transition: transform $pm-dur $pm-ease, box-shadow $pm-dur $pm-ease;
+
+  &:hover { transform: translateY(-4px); box-shadow: $pm-shadow; }
+  p { color: var(--pm-ink-body); font-size: $pm-step-0; }
+}
+.pm-card--sand { background: var(--pm-bg-alt); }
+.pm-card__num {
+  font-family: var(--pm-font-display);
+  font-size: $pm-step-3;
+  color: var(--pm-pink-500);
+  line-height: 1;
+}
+
+// =============================================================================
+// Accordion — pm-accordion (native <details>)
+// =============================================================================
+.pm-accordion {
+  border-top: 1px solid var(--pm-hairline);
+  max-width: 52rem;
+}
+.pm-accordion__item {
+  border-bottom: 1px solid var(--pm-hairline);
+}
+.pm-accordion__q {
+  display: flex;
+  align-items: center;
+  gap: $pm-space-4;
+  padding: $pm-space-5 0;
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--pm-font-display);
+  font-weight: 500;
+  font-size: $pm-step-2;
+  letter-spacing: $pm-tracking-snug;
+  color: var(--pm-ink-strong);
+
+  &::-webkit-details-marker { display: none; }
+}
+.pm-accordion__num {
+  font-size: $pm-step-0;
+  color: var(--pm-pink-500);
+  font-weight: 600;
+  min-width: 2.2ch;
+}
+.pm-accordion__icon {
+  margin-left: auto;
+  position: relative;
+  width: 18px;
+  height: 18px;
+  flex: none;
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    background: var(--pm-primary-deep);
+    transition: transform $pm-dur $pm-ease, opacity $pm-dur $pm-ease;
+  }
+  &::before { width: 100%; height: 1.5px; } // horizontal
+  &::after { width: 1.5px; height: 100%; }  // vertical
+}
+.pm-accordion__item[open] .pm-accordion__icon::after { transform: scaleY(0); opacity: 0; }
+.pm-accordion__a {
+  padding: 0 0 $pm-space-6;
+  max-width: $pm-maxw-text;
+  color: var(--pm-ink-body);
+  font-size: $pm-step-0;
+  line-height: 1.6;
+}

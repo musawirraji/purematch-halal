@@ -1,0 +1,94 @@
+@use "tokens" as *;
+
+// =============================================================================
+// SERVICES — the 6-step journey (Daylight S3 horizontal scroller)
+// Mobile: steps stack vertically. Desktop (lg + motion-safe): pinned horizontal
+// scroller — the track translates left as you scroll (steps slide from right).
+// =============================================================================
+.pm-journey {
+  position: relative;
+  background: var(--pm-bg);
+}
+.pm-journey__track {
+  display: flex;
+  flex-direction: column;
+  gap: $pm-space-9;
+  padding: $pm-space-8 var(--pm-edge);
+}
+.pm-journey__panel {
+  display: flex;
+  flex-direction: column;
+  gap: $pm-space-4;
+  max-width: 30rem;
+  margin-inline: auto;
+}
+.pm-journey__num {
+  @include pm-display;
+  font-size: $pm-step-5;
+  line-height: 1;
+  color: var(--pm-accent);
+}
+.pm-journey__plate { width: 100%; max-width: 22rem; }
+.pm-journey__title {
+  font-family: var(--pm-font-display);
+  font-weight: 600;
+  font-size: $pm-step-3;
+  letter-spacing: $pm-tracking-snug;
+  color: var(--pm-ink-strong);
+}
+.pm-journey__body {
+  font-size: $pm-step-0;
+  line-height: 1.55;
+  color: var(--pm-ink-body);
+  max-width: 34ch;
+}
+
+// dua step (06)
+.pm-journey__panel--dua { text-align: center; align-items: center; }
+.pm-journey__dua { display: flex; flex-direction: column; align-items: center; gap: $pm-space-4; }
+.pm-journey__duatitle {
+  @include pm-eyebrow;
+  color: var(--pm-accent);
+}
+.pm-journey__duatext {
+  @include pm-display;
+  font-weight: 500;
+  font-size: clamp(2.4rem, 6vw, 4.6rem);
+  letter-spacing: 0.01em;
+  color: var(--pm-ink-strong);
+}
+.pm-journey__body--dua { text-align: center; color: var(--pm-ink-muted); max-width: 28ch; }
+
+// -----------------------------------------------------------------------------
+// Desktop — pinned horizontal scroller
+// -----------------------------------------------------------------------------
+@media (min-width: 64rem) and (prefers-reduced-motion: no-preference) {
+  .pm-journey__pin {
+    height: 100svh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+  .pm-journey__track {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: max-content;
+    height: auto;
+    gap: clamp(4rem, 7vw, 9rem);
+    padding: 0 max(var(--pm-edge), 12vw);
+    will-change: transform;
+  }
+  .pm-journey__panel {
+    flex: 0 0 auto;
+    width: clamp(23rem, 28vw, 32rem);
+    max-width: none;
+    margin: 0;
+    gap: $pm-space-5;
+  }
+  .pm-journey__plate { max-width: none; width: clamp(16rem, 20vw, 22rem); }
+  // subtle vertical rhythm: nudge alternate steps
+  .pm-journey__panel:nth-child(even) { align-self: flex-start; margin-top: 8vh; }
+  .pm-journey__panel:nth-child(odd) { align-self: flex-end; margin-bottom: 8vh; }
+  .pm-journey__panel--dua { align-self: center !important; margin: 0 !important; }
+}

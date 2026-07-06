@@ -1,0 +1,51 @@
+@use "tokens" as *;
+
+// LAYOUT utilities
+.pm-container { @include pm-container; }
+
+.pm-section {
+  padding-block: $pm-section-y;
+  position: relative;
+}
+
+.pm-hairline {
+  border: 0;
+  height: 1px;
+  background: var(--pm-hairline);
+}
+
+.pm-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Reveal primitive — paired with the useReveal hook.
+.pm-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  will-change: opacity, transform;
+}
+.pm-reveal.is-in {
+  opacity: 1;
+  transform: none;
+  transition: opacity $pm-dur $pm-ease, transform $pm-dur $pm-ease;
+}
+
+@include pm-reduce-motion {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .pm-reveal { opacity: 1; transform: none; }
+}

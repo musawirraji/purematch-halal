@@ -1,0 +1,94 @@
+@use "tokens" as *;
+
+// =============================================================================
+// Button — pm-btn. Squared, letterspaced caps (editorial, not SaaS pills).
+// Variants: primary (ink), pink, ghost (hairline), link (ruled text). Sizes sm/lg.
+// =============================================================================
+.pm-btn {
+  --_bg: var(--pm-ink-900);
+  --_fg: var(--pm-paper);
+  --_bd: var(--pm-ink-900);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7em;
+  font-family: var(--pm-font-body);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1;
+  padding: 1.15em 1.9em;
+  border-radius: 0;
+  background: var(--_bg);
+  color: var(--_fg);
+  border: 1px solid var(--_bd);
+  cursor: pointer;
+  white-space: nowrap;
+  position: relative;
+  transition: background-color $pm-dur-fast $pm-ease, color $pm-dur-fast $pm-ease,
+    border-color $pm-dur-fast $pm-ease;
+
+  &:hover { --_bg: var(--pm-accent); --_fg: var(--pm-white); --_bd: var(--pm-accent); } // pink hover
+  &:active { transform: translateY(1px); }
+  &:disabled,
+  &[aria-disabled="true"] {
+    --_bg: var(--pm-line);
+    --_fg: var(--pm-ink-300);
+    --_bd: var(--pm-line);
+    cursor: not-allowed;
+  }
+  svg { width: 1.15em; height: 1.15em; }
+}
+
+// Pink primary — the accent CTA
+.pm-btn--pink {
+  --_bg: var(--pm-accent);
+  --_fg: var(--pm-white);
+  --_bd: var(--pm-accent);
+  &:hover { --_bg: var(--pm-accent-deep); --_fg: var(--pm-white); --_bd: var(--pm-accent-deep); }
+}
+
+// Ghost — hairline outline
+.pm-btn--ghost {
+  --_bg: transparent;
+  --_fg: var(--pm-ink-900);
+  --_bd: var(--pm-ink-900);
+  &:hover { --_bg: var(--pm-accent); --_fg: var(--pm-white); --_bd: var(--pm-accent); } // pink hover
+}
+
+// On dark chapters
+.pm-btn--onink {
+  --_bg: var(--pm-paper);
+  --_fg: var(--pm-ink-900);
+  --_bd: var(--pm-paper);
+  &:hover { --_bg: var(--pm-accent); --_fg: var(--pm-white); --_bd: var(--pm-accent); } // pink hover
+}
+
+// Text link with a rule that retracts on hover
+.pm-btn--link {
+  --_bg: transparent;
+  --_fg: var(--pm-ink-strong);
+  --_bd: transparent;
+  padding: 0.35em 0;
+  letter-spacing: 0.12em;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(1);
+    transform-origin: right;
+    transition: transform $pm-dur $pm-ease;
+  }
+  &:hover { --_bg: transparent; --_fg: var(--pm-accent); }
+  &:hover::after { transform: scaleX(0); transform-origin: left; }
+}
+
+.pm-btn--sm { padding: 0.85em 1.3em; font-size: 0.68rem; }
+.pm-btn--lg { padding: 1.3em 2.3em; font-size: 0.82rem; }
+.pm-btn--block { display: flex; width: 100%; }

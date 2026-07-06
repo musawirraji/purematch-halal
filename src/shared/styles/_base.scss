@@ -1,0 +1,76 @@
+@use "tokens" as *;
+
+// RESET / BASE
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: auto; // Lenis owns scroll
+}
+
+html,
+body {
+  overflow-x: clip; // guard page-level horizontal scroll (mobile-first)
+}
+
+body {
+  background: var(--pm-bg);
+  color: var(--pm-ink-body);
+  font-family: var(--pm-font-body);
+  font-size: $pm-step-0;
+  line-height: $pm-leading-body;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transition: background-color $pm-dur-slow $pm-ease, color $pm-dur-slow $pm-ease;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--pm-primary);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--pm-pink-100);
+  color: var(--pm-ink);
+}

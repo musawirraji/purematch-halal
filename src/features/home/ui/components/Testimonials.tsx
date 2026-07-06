@@ -1,0 +1,69 @@
+"use client";
+
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { TESTIMONIALS } from "../../domain/content";
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
+
+// Daylight S6 — a giant heading whose characters flip in/out on the Y axis in
+// 3D (perspective + transform-origin 100% 50%), with the story cards layered
+// over it. Here it flips IN as the card arrives (the stacking card handles the
+// leaving). Gated lg + motion-safe; static heading + cards below.
+const HEAD = "Kind words.";
+
+export function Testimonials() {
+  const root = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
+        gsap.fromTo(
+          ".pm-testi__char",
+          { rotateY: -92, z: -260, opacity: 0 },
+          {
+            rotateY: 0, z: 0, opacity: 1, ease: "none", stagger: 0.035,
+            scrollTrigger: { trigger: root.current, start: "top 82%", end: "top 32%", scrub: 1 },
+          }
+        );
+        gsap.fromTo(
+          ".pm-testi__card",
+          { opacity: 0, y: 70 },
+          {
+            opacity: 1, y: 0, ease: "none", stagger: 0.14,
+            scrollTrigger: { trigger: root.current, start: "top 60%", end: "top 18%", scrub: 1 },
+          }
+        );
+      });
+    },
+    { scope: root }
+  );
+
+  return (
+    <section className="pm-section pm-testi" ref={root}>
+      <p className="pm-eyebrow pm-testi__kicker">Success stories</p>
+      <h2 className="pm-testi__head" aria-label="Kind words">
+        {[...HEAD].map((ch, i) => (
+          <span className="pm-testi__char" key={i} aria-hidden="true">
+            {ch === " " ? " " : ch}
+          </span>
+        ))}
+      </h2>
+
+      <div className="pm-testi__cards">
+        {TESTIMONIALS.map((t, i) => (
+          <figure className={`pm-testi__card pm-testi__card--${i + 1}`} key={i}>
+            <blockquote className="pm-testi__quote">&ldquo;{t.quote}&rdquo;</blockquote>
+            <figcaption className="pm-testi__cap">
+              <span className="pm-testi__names">{t.names}</span>
+              <span className="pm-testi__meta">{t.meta}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+  );
+}

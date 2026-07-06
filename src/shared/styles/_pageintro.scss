@@ -1,0 +1,45 @@
+@use "tokens" as *;
+
+// =============================================================================
+// PageIntro — editorial page header (kicker + huge title + dek), CSS reveal
+// =============================================================================
+.pm-pageintro {
+  padding-top: calc(var(--pm-header-h) + var(--pm-annbar-h) + #{$pm-space-8});
+  padding-bottom: $pm-space-6;
+
+  &--center { text-align: center; .pm-pageintro__dek { margin-inline: auto; } }
+}
+.pm-pageintro__kicker {
+  color: var(--pm-accent);
+  opacity: 0;
+  animation: pm-intro-up 0.7s $pm-ease 0.05s forwards;
+}
+.pm-pageintro__title {
+  @include pm-display;
+  font-size: $pm-step-7;
+  color: var(--pm-ink-strong);
+  max-width: 18ch;
+  margin: $pm-space-4 0 $pm-space-5;
+  opacity: 0;
+  animation: pm-intro-up 0.8s $pm-ease 0.12s forwards;
+  .pm-pageintro--center & { max-width: 20ch; margin-inline: auto; }
+}
+.pm-pageintro__dek {
+  font-size: $pm-step-1;
+  line-height: 1.5;
+  color: var(--pm-ink-body);
+  max-width: 42rem;
+  opacity: 0;
+  animation: pm-intro-up 0.8s $pm-ease 0.2s forwards;
+}
+.pm-pageintro__rule { margin-top: $pm-space-7; }
+
+@keyframes pm-intro-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: none; }
+}
+@include pm-reduce-motion {
+  .pm-pageintro__kicker,
+  .pm-pageintro__title,
+  .pm-pageintro__dek { animation: none; opacity: 1; }
+}

@@ -1,0 +1,37 @@
+@use "tokens" as *;
+
+// TYPOGRAPHY primitives
+.pm-eyebrow {
+  @include pm-eyebrow;
+  color: var(--pm-accent);
+  display: inline-block;
+}
+
+.pm-display {
+  @include pm-display;
+  color: var(--pm-ink-strong);
+}
+
+.pm-h1 { @include pm-display; font-size: $pm-step-6; color: var(--pm-ink-strong); }
+.pm-h2 { @include pm-display; font-size: $pm-step-5; color: var(--pm-ink-strong); }
+.pm-h3 { @include pm-display; font-size: $pm-step-3; line-height: $pm-leading-snug; color: var(--pm-ink-strong); }
+.pm-h4 {
+  font-family: var(--pm-font-body);
+  font-weight: 600;
+  font-size: $pm-step-1;
+  letter-spacing: $pm-tracking-snug;
+  color: var(--pm-ink-strong);
+}
+
+.pm-lead {
+  font-size: $pm-step-1;
+  line-height: 1.5;
+  color: var(--pm-ink-body);
+}
+
+.pm-prose {
+  max-width: $pm-maxw-text;
+  p + p { margin-top: $pm-space-4; }
+}
+
+.pm-muted { color: var(--pm-ink-muted); }

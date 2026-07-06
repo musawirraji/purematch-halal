@@ -1,0 +1,25 @@
+// =============================================================================
+// Pure Match Halal — global stylesheet (single entry, imported once in layout)
+// Pure @use manifest: CSS is emitted in this order. `tokens` emits nothing.
+// =============================================================================
+@use "tokens" as *;
+@use "root"; // :root custom properties (the token → CSS-var bridge)
+@use "base"; // reset + base element styles
+@use "typography"; // display / eyebrow / prose classes
+@use "utilities"; // container / section / reveal / reduced-motion
+@use "buttons";
+@use "forms";
+@use "components";
+@use "media";
+@use "chrome";
+@use "pageintro";
+@use "home";
+@use "services";
+@use "register";
+@use "about";
+@use "events";
+@use "policy";
+@use "gallery";
+@use "faqs";
+@use "contact";
+@use "style-guide";

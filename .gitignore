@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# planning / agent docs — kept local, not published
+CLAUDE.md
+AGENTS.md
+DAYLIGHT-ADAPTATION.md
+IMAGE-PROMPTS.md

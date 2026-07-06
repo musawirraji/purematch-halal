@@ -1,0 +1,50 @@
+@use "tokens" as *;
+
+// :root — tokens emitted as CSS custom properties. Component styles read var(--x).
+// Palette: black & white + pink. Type: Clash Display (fashion-editorial) + General Sans.
+:root {
+  // TYPE seam — swap these two lines to change the whole type system
+  --pm-font-display: var(--pm-font-clash), "Times New Roman", serif;
+  --pm-font-body: var(--pm-font-general), system-ui, sans-serif;
+
+  // Layout
+  --pm-header-h: 4.75rem;
+  --pm-annbar-h: 0rem; // announcement bar removed
+  --pm-edge: clamp(1.6rem, 4vw, 4rem); // full-bleed side gutter (header/hero align to this)
+
+  // INK ramp (near-black, neutral)
+  --pm-ink: #{$pm-ink};
+  --pm-ink-900: #{$pm-ink-900};
+  --pm-ink-800: #{$pm-ink-800};
+  --pm-ink-700: #{$pm-ink-700};
+  --pm-ink-600: #{$pm-ink-600};
+  --pm-ink-500: #{$pm-ink-500};
+  --pm-ink-400: #{$pm-ink-400};
+  --pm-ink-300: #{$pm-ink-300};
+  --pm-ink-200: #{$pm-ink-200};
+
+  // PAPER (neutral off-white) + line
+  --pm-paper: #{$pm-paper};
+  --pm-paper-2: #{$pm-paper-2};
+  --pm-line: #{$pm-line};
+  --pm-white: #{$pm-white};
+
+  // PINK accent
+  --pm-pink-100: #{$pm-pink-100};
+  --pm-pink-300: #{$pm-pink-300};
+  --pm-pink-500: #{$pm-pink-500};
+  --pm-pink-600: #{$pm-pink-600};
+
+  // SEMANTIC (chapter-themeable)
+  --pm-bg: #{$pm-bg};
+  --pm-bg-alt: #{$pm-bg-alt};
+  --pm-surface: #{$pm-surface};
+  --pm-ink-strong: #{$pm-ink-strong};
+  --pm-ink-body: #{$pm-ink-body};
+  --pm-ink-muted: #{$pm-ink-muted};
+  --pm-primary: #{$pm-primary};
+  --pm-primary-deep: #{$pm-primary-deep};
+  --pm-accent: #{$pm-accent};
+  --pm-accent-deep: #{$pm-accent-deep};
+  --pm-hairline: #{$pm-hairline};
+}

@@ -1,0 +1,178 @@
+// =============================================================================
+// Pure Match Halal — Design Tokens (single source of truth)
+// Pure definitions only: SCSS variables, maps, mixins, functions.
+// EMITS NO CSS on @use — safe to inject into every stylesheet via sassOptions
+// additionalData. The :root custom properties are emitted once in globals.scss.
+// =============================================================================
+
+@use "sass:map";
+@use "sass:math";
+
+// -----------------------------------------------------------------------------
+// COLOUR — black & white + pink. Editorial monochrome; ONE accent (no warmth).
+// -----------------------------------------------------------------------------
+// Ink — neutral near-black ramp (text + dark chapters)
+$pm-ink-900: #0E0E0F; // deepest — dark section backgrounds
+$pm-ink-800: #141414; // near-black headings
+$pm-ink-700: #232323; // strong body
+$pm-ink-600: #2E2E2E; // body text on paper
+$pm-ink-500: #565553; // secondary
+$pm-ink-400: #77756F; // muted / captions
+$pm-ink-300: #A6A49E; // faint / disabled
+$pm-ink-200: #CBC9C4;
+
+// Paper — neutral off-white (NOT cream; no gold)
+$pm-paper:   #FAFAF8; // default page background
+$pm-paper-2: #F1F0ED; // alt sections
+$pm-line:    #E4E3DF; // hairlines
+$pm-white:   #FFFFFF;
+$pm-ink:     #141414; // legacy alias → near-black
+
+// Pink — the single accent. Punchy against stark b/w.
+$pm-pink-100: #F9E4EC; // tint (backgrounds, badges)
+$pm-pink-300: #F1A8C0;
+$pm-pink-500: #E8517B; // accent
+$pm-pink-600: #CE3E64; // deep — hover
+
+// -----------------------------------------------------------------------------
+// SEMANTIC ROLES
+// -----------------------------------------------------------------------------
+$pm-bg:            $pm-paper;
+$pm-bg-alt:        $pm-paper-2;
+$pm-surface:       $pm-white;
+$pm-ink-strong:    $pm-ink-800;
+$pm-ink-body:      $pm-ink-600;
+$pm-ink-muted:     $pm-ink-400;
+$pm-primary:       $pm-ink-900;   // primary action = ink/black (editorial)
+$pm-primary-deep:  #000000;       // hover
+$pm-primary-soft:  $pm-pink-100;
+$pm-accent:        $pm-pink-500;  // the pink
+$pm-accent-deep:   $pm-pink-600;
+$pm-hairline:      $pm-line;
+$pm-ink-bg:        $pm-ink-900;   // dark section background
+$pm-ink-bg-ink:    $pm-paper;     // text on dark section
+
+// -----------------------------------------------------------------------------
+// TYPE — the display/body seam. Swap the two `--pm-font-*` custom props in
+// globals.scss to change the whole system. Families are wired in fonts.ts.
+// -----------------------------------------------------------------------------
+$pm-font-display: var(--pm-font-display);
+$pm-font-body:    var(--pm-font-body);
+
+// Fluid type scale — clamp(min, vw, max), mobile-first
+$pm-step--1: clamp(0.83rem, 0.80rem + 0.15vw, 0.92rem);
+$pm-step-0:  clamp(1.00rem, 0.96rem + 0.20vw, 1.13rem);
+$pm-step-1:  clamp(1.20rem, 1.12rem + 0.40vw, 1.50rem);
+$pm-step-2:  clamp(1.44rem, 1.30rem + 0.70vw, 2.00rem);
+$pm-step-3:  clamp(1.73rem, 1.50rem + 1.15vw, 2.66rem);
+$pm-step-4:  clamp(2.07rem, 1.70rem + 1.85vw, 3.55rem);
+$pm-step-5:  clamp(2.49rem, 1.95rem + 2.70vw, 4.74rem);
+$pm-step-6:  clamp(2.99rem, 2.15rem + 4.20vw, 6.31rem);
+$pm-step-7:  clamp(3.30rem, 2.10rem + 6.00vw, 8.40rem); // hero display
+
+$pm-leading-tight:  1.02;
+$pm-leading-snug:   1.14;
+$pm-leading-body:   1.62;
+$pm-tracking-tight: -0.02em;
+$pm-tracking-snug:  -0.01em;
+$pm-tracking-label: 0.18em; // small-caps eyebrow labels (Aman pattern)
+
+// -----------------------------------------------------------------------------
+// SPACING — 4px base rhythm
+// -----------------------------------------------------------------------------
+$pm-space-1:  0.25rem;
+$pm-space-2:  0.5rem;
+$pm-space-3:  0.75rem;
+$pm-space-4:  1rem;
+$pm-space-5:  1.5rem;
+$pm-space-6:  2rem;
+$pm-space-7:  3rem;
+$pm-space-8:  4rem;
+$pm-space-9:  6rem;
+$pm-space-10: 8rem;
+$pm-space-11: 12rem;
+
+// Section vertical rhythm (fluid)
+$pm-section-y: clamp(4rem, 3rem + 6vw, 9rem);
+$pm-gutter:    clamp(1.25rem, 0.9rem + 1.6vw, 2.5rem);
+$pm-maxw:      78rem;   // content max width
+$pm-maxw-text: 44rem;   // prose measure
+
+// -----------------------------------------------------------------------------
+// RADII / SHADOWS / MOTION
+// -----------------------------------------------------------------------------
+// Editorial = sharp. Near-square structural corners, hairlines over shadows.
+$pm-radius-sm: 0;
+$pm-radius:    0;
+$pm-radius-lg: 0;
+$pm-radius-pill: 0; // buttons are squared, not pills
+
+$pm-shadow-sm: none;
+$pm-shadow:    0 18px 40px -26px rgba(14, 14, 15, 0.28);
+$pm-shadow-lg: 0 50px 90px -40px rgba(14, 14, 15, 0.40);
+
+$pm-ease:      cubic-bezier(0.22, 1, 0.36, 1);   // long ease-out (Aman pacing)
+$pm-ease-quint:cubic-bezier(0.23, 1, 0.32, 1);   // easeOutQuint — Daylight's scroll easing
+$pm-ease-inout:cubic-bezier(0.65, 0, 0.35, 1);
+$pm-dur-fast:  0.28s;
+$pm-dur:       0.6s;
+$pm-dur-slow:  0.9s;
+
+// -----------------------------------------------------------------------------
+// BREAKPOINTS
+// -----------------------------------------------------------------------------
+$pm-bp: (
+  sm: 30rem,   // 480
+  md: 48rem,   // 768
+  lg: 64rem,   // 1024
+  xl: 80rem,   // 1280
+  xxl: 96rem,  // 1536
+);
+
+$pm-z: (
+  base: 0, rope: 1, canvas: 2, content: 10, sticky: 20, nav: 30,
+  menu: 40, overlay: 50, modal: 60, toast: 70,
+);
+
+// -----------------------------------------------------------------------------
+// MIXINS / FUNCTIONS
+// -----------------------------------------------------------------------------
+@function pm-z($k) { @return map.get($pm-z, $k); }
+
+@mixin bp($k) {
+  $v: map.get($pm-bp, $k);
+  @if $v == null { @error "Unknown breakpoint: #{$k}"; }
+  @media (min-width: $v) { @content; }
+}
+
+// Content container
+@mixin pm-container {
+  width: 100%;
+  max-width: $pm-maxw;
+  margin-inline: auto;
+  padding-inline: $pm-gutter;
+}
+
+// Small-caps letterspaced eyebrow label (Aman pattern), set in body face
+@mixin pm-eyebrow {
+  font-family: $pm-font-body;
+  font-size: $pm-step--1;
+  font-weight: 600;
+  letter-spacing: $pm-tracking-label;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+// Display headline base
+@mixin pm-display {
+  font-family: $pm-font-display;
+  font-weight: 600;
+  line-height: $pm-leading-tight;
+  letter-spacing: $pm-tracking-tight;
+  text-wrap: balance;
+}
+
+// Respect reduced motion — collapse transitions/animation
+@mixin pm-reduce-motion {
+  @media (prefers-reduced-motion: reduce) { @content; }
+}
