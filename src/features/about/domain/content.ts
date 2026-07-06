@@ -1,14 +1,16 @@
 // About page content. Pure data, no I/O.
 
 export const ABOUT = {
-  // Showreel-style hero (adapted from Exo Ape): oversized line-mask title + media
+  // Showreel hero (Exo Ape converge/expand): two words pinned left + right, a
+  // centre video that starts small; on scroll the words slide inward while the
+  // video expands to fill the screen. The two words are the brand-name reveal.
   reel: {
-    label: "The practice · est. 2019",
-    lines: ["Not an app.", "A person."],
-    body: "Pure Match Halal is a boutique, faith-centred matchmaking practice — one considered introduction at a time. Human, wali-friendly, and discreet from the very first salaam.",
-    media: "love-couple.jpg",
-    mediaAlt: "A couple at golden hour, seen from behind",
-    scrollHint: "Read her letter",
+    label: "The practice, in motion",
+    wordLeft: "Pure",
+    wordRight: "Match",
+    video: "about-reel.mp4", // generated brand film (join 6s Grok clips in CapCut)
+    poster: "love-couple.jpg", // shown until the video is dropped in
+    note: "Some things can't be swiped. Put on your headphones.",
   },
   // Founder's letter — editorial two-column with a sticky portrait
   story: {
