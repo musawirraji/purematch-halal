@@ -16,6 +16,8 @@ type MediaFrameProps = {
   kenBurns?: boolean;
   tone?: "ink" | "paper" | "terracotta" | "sand";
   plate?: string;
+  /** fill the parent's box (no fixed aspect-ratio) — the image object-fit covers */
+  fill?: boolean;
 };
 
 // Reliable grayscale placeholder link at the right orientation (fallback when
@@ -37,6 +39,7 @@ export function MediaFrame({
   className,
   kenBurns,
   tone = "ink",
+  fill,
 }: MediaFrameProps) {
   const light = tone === "paper" || tone === "sand";
   // Prefer a self-hosted /img/<file> placeholder (reliable + drop-in swap by
@@ -45,8 +48,8 @@ export function MediaFrame({
 
   return (
     <figure
-      className={`pm-plate ${light ? "pm-plate--light" : "pm-plate--ink"} ${kenBurns ? "pm-plate--kb" : ""} ${className ?? ""}`}
-      style={{ aspectRatio: ratio }}
+      className={`pm-plate ${light ? "pm-plate--light" : "pm-plate--ink"} ${kenBurns ? "pm-plate--kb" : ""} ${fill ? "pm-plate--fill" : ""} ${className ?? ""}`}
+      style={fill ? undefined : { aspectRatio: ratio }}
       data-file={file}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}

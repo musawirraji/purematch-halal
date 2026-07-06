@@ -21,6 +21,8 @@
   object-fit: cover;
   filter: grayscale(1) contrast(1.04); // duotone-lean; drop later for colour art
 }
+// fill mode — no fixed aspect-ratio; the plate takes its size from the parent box
+.pm-plate--fill { height: 100%; }
 
 // (caption scrim + inset frame removed — real images are in, no placeholder tags)
 
