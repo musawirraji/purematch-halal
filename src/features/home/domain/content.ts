@@ -32,12 +32,16 @@ export const HERO = {
 
 export const ABOUT_INTRO = {
   kicker: "Our practice",
+  index: "§ 01 — The founder",
   quote: "Matchmaking the way it was always done — one family at a time.",
   body: [
     "Pure Match Halal is not an app and not an algorithm. It is a person who sits with you, learns your intention, and introduces you — with discretion — to someone chosen with care.",
     "You'll speak to a person, not a profile. Every introduction is made with your marriage, your deen, and your dignity at the centre.",
   ],
   cta: "Read the founder's letter",
+  signature: "Hoyin Oba",
+  role: "Founder · Pure Match Halal",
+  principles: ["One match at a time", "Wali-friendly", "Discreet by design"],
   file: "founder-portrait.jpg",
   label: "Founder portrait — Hoyin Oba (placeholder until shoot)",
 } as const;

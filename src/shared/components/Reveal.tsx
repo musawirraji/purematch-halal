@@ -14,7 +14,7 @@ export function Reveal({
   children: React.ReactNode;
   className?: string;
   delay?: number;
-  as?: "div" | "section" | "li" | "article" | "figure" | "span";
+  as?: "div" | "section" | "li" | "article" | "figure" | "span" | "ul";
 }) {
   const ref = useReveal<HTMLElement>({ delay });
   const Tag = as as keyof React.JSX.IntrinsicElements;
