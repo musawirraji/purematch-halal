@@ -75,7 +75,8 @@ export function CinematicScene() {
           // 3) at full-screen → switch to the different image + love story
           .fromTo(".pm-cine__lovebg", { opacity: 0 }, { opacity: 1, duration: 0.06 }, 0.58)
           .to(".pm-cine__object", { opacity: 0, duration: 0.08 }, 0.6)
-          .fromTo(".pm-cine__lovescrim", { opacity: 0 }, { opacity: 0.78, duration: 0.1 }, 0.62)
+          .fromTo(".pm-cine__lovescrim", { opacity: 0 }, { opacity: 0.5, duration: 0.1 }, 0.62)
+          .fromTo(".pm-cine__glass", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.12 }, 0.64)
           .fromTo(".pm-cine__lk", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.1 }, 0.68)
           .fromTo(".pm-cine__ln", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.1 }, 0.72)
           .fromTo(".pm-cine__lb", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.1, stagger: 0.08 }, 0.77)
@@ -96,16 +97,18 @@ export function CinematicScene() {
           <img className="pm-cine__lovebg" src="/img/love-couple.jpg" alt="" />
           <span className="pm-cine__lovescrim" aria-hidden="true" />
           <div className="pm-cine__story">
-            <p className="pm-eyebrow pm-cine__lk">A love story</p>
-            <h2 className="pm-cine__ln">Aisha &amp; Ibrahim</h2>
-            {BEATS.map((b, i) => (
-              <p className="pm-cine__lb" key={i}>
-                {b}
+            <div className="pm-cine__glass">
+              <p className="pm-eyebrow pm-cine__lk">A love story</p>
+              <h2 className="pm-cine__ln">Aisha &amp; Ibrahim</h2>
+              {BEATS.map((b, i) => (
+                <p className="pm-cine__lb" key={i}>
+                  {b}
+                </p>
+              ))}
+              <p className="pm-cine__lm">
+                Matched March 2025 · Lagos <span>— names changed, shared with permission</span>
               </p>
-            ))}
-            <p className="pm-cine__lm">
-              Matched March 2025 · Lagos <span>— names changed, shared with permission</span>
-            </p>
+            </div>
           </div>
         </div>
 
