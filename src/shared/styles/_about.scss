@@ -235,3 +235,66 @@
   color: var(--pm-ink-strong);
   margin-top: $pm-space-3;
 }
+
+// -----------------------------------------------------------------------------
+// What we believe — sticky heading + ruled, numbered principles list.
+// -----------------------------------------------------------------------------
+.pm-believe { background: var(--pm-paper); }
+.pm-believe__inner {
+  padding-inline: var(--pm-edge);
+  display: grid;
+  gap: $pm-space-7;
+  grid-template-columns: 1fr;
+  @include bp(lg) {
+    grid-template-columns: 0.7fr 1fr;
+    gap: clamp($pm-space-8, 5vw, $pm-space-9);
+    align-items: start;
+  }
+}
+.pm-believe__kicker { color: var(--pm-accent); margin: 0 0 $pm-space-3; }
+.pm-believe__heading {
+  @include pm-display;
+  font-weight: 500;
+  font-size: clamp(1.9rem, 1.2rem + 2.4vw, 3.2rem);
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+  color: var(--pm-ink-strong);
+  text-wrap: balance;
+  margin: 0;
+  @include bp(lg) { position: sticky; top: calc(var(--pm-header-h) + #{$pm-space-6}); }
+}
+
+.pm-believe__list { list-style: none; margin: 0; padding: 0; }
+.pm-believe__item {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  column-gap: $pm-space-5;
+  row-gap: $pm-space-2;
+  padding-block: clamp($pm-space-5, 3vh, $pm-space-6);
+  border-top: 1px solid var(--pm-line);
+  &:last-child { border-bottom: 1px solid var(--pm-line); }
+}
+.pm-believe__n {
+  grid-row: 1 / span 2;
+  font-family: var(--pm-font-body);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  color: var(--pm-accent);
+  padding-top: 0.4em;
+}
+.pm-believe__title {
+  grid-column: 2;
+  font-family: var(--pm-font-display);
+  font-weight: 500;
+  font-size: $pm-step-2;
+  color: var(--pm-ink-strong);
+  margin: 0;
+}
+.pm-believe__body {
+  grid-column: 2;
+  font-size: $pm-step-0;
+  line-height: 1.55;
+  color: var(--pm-ink-body);
+  max-width: 46ch;
+  margin: 0;
+}

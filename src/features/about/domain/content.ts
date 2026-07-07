@@ -26,4 +26,25 @@ export const ABOUT = {
     file: "founder-portrait.jpg",
     label: "Founder portrait — Hoyin Oba",
   },
+  // What we believe — the practice's principles
+  believe: {
+    kicker: "What we believe",
+    heading: "Marriage is worth doing properly.",
+    items: [
+      { n: "01", title: "One at a time", body: "No queue, no batching — our full attention until there's someone right for you." },
+      { n: "02", title: "A person, not an algorithm", body: "Every introduction is made by a human who knows your intention, never a match score." },
+      { n: "03", title: "Wali-friendly by default", body: "Your family is welcome from the very first conversation — the way it should be." },
+      { n: "04", title: "Discreet, always", body: "No public profiles, no browsing. What you share stays between us." },
+    ],
+  },
+  // Closing CTA
+  cta: {
+    kicker: "Begin",
+    index: "§ — The invitation",
+    headline: "Ready when you are.",
+    body: "Tell us who you are and what you're looking for, in confidence. We'll take it from there — gently, and at your pace.",
+    cta: "Begin Your Application",
+    secondary: "See how it works",
+    trust: ["Wali-friendly", "Human-vetted", "Discreet by design"],
+  },
 } as const;
