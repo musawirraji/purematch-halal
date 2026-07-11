@@ -1,3 +1,132 @@
 @use "tokens" as *;
 
-// contact page styles (filled during feature build)
+// =============================================================================
+// CONTACT — details + CTAs, message form, salaam sign-off. Field controls come
+// from _forms.scss; the free-call reminder reuses pm-freecall.
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Details + CTAs
+// -----------------------------------------------------------------------------
+.pm-cdetails { background: var(--pm-paper); }
+.pm-cdetails__inner { padding-inline: var(--pm-edge); max-width: 62rem; margin-inline: auto; }
+.pm-cdetails__kicker { display: block; color: var(--pm-accent); margin-bottom: $pm-space-3; }
+.pm-cdetails__heading {
+  @include pm-display;
+  font-weight: 500;
+  font-size: clamp(1.9rem, 1.2rem + 2.4vw, 3.2rem);
+  color: var(--pm-ink-strong);
+  margin: 0 0 $pm-space-7;
+}
+.pm-cdetails__list {
+  list-style: none;
+  margin: 0 0 $pm-space-7;
+  padding: 0;
+  display: grid;
+  gap: $pm-space-4;
+  grid-template-columns: 1fr;
+  @include bp(md) { grid-template-columns: repeat(3, 1fr); }
+}
+.pm-cdetails__link {
+  display: flex;
+  flex-direction: column;
+  gap: $pm-space-2;
+  height: 100%;
+  padding: clamp($pm-space-4, 3vw, $pm-space-6);
+  background: var(--pm-surface);
+  border: 1px solid var(--pm-hairline);
+  transition: border-color $pm-dur-fast $pm-ease, transform $pm-dur $pm-ease;
+  &:hover { border-color: var(--pm-accent); transform: translateY(-4px); }
+}
+.pm-cdetails__icon {
+  display: inline-flex;
+  color: var(--pm-accent);
+  margin-bottom: $pm-space-2;
+  svg { width: 1.5rem; height: 1.5rem; }
+}
+.pm-cdetails__label {
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pm-ink-muted);
+}
+.pm-cdetails__value {
+  font-family: var(--pm-font-display);
+  font-weight: 600;
+  font-size: $pm-step-1;
+  color: var(--pm-ink-strong);
+  word-break: break-word;
+}
+.pm-cdetails__ctas { display: flex; flex-wrap: wrap; gap: $pm-space-4; }
+
+// -----------------------------------------------------------------------------
+// Message form
+// -----------------------------------------------------------------------------
+.pm-cform { background: var(--pm-bg-alt); scroll-margin-top: calc(var(--pm-header-h) + #{$pm-space-5}); }
+.pm-cform__inner { padding-inline: var(--pm-edge); max-width: 52rem; margin-inline: auto; }
+.pm-cform__kicker { display: block; color: var(--pm-accent); margin-bottom: $pm-space-3; }
+.pm-cform__heading {
+  @include pm-display;
+  font-weight: 500;
+  font-size: clamp(1.8rem, 1.1rem + 2.2vw, 3rem);
+  color: var(--pm-ink-strong);
+  margin: 0 0 $pm-space-3;
+}
+.pm-cform__sub { font-size: $pm-step-0; color: var(--pm-ink-body); margin: 0 0 $pm-space-7; max-width: 46ch; }
+.pm-cform__form {
+  background: var(--pm-surface);
+  border: 1px solid var(--pm-hairline);
+  padding: clamp($pm-space-5, 4vw, $pm-space-8);
+  display: flex;
+  flex-direction: column;
+  gap: $pm-space-5;
+}
+.pm-cform__grid {
+  display: grid;
+  gap: $pm-space-5;
+  grid-template-columns: 1fr;
+  @include bp(md) { grid-template-columns: 1fr 1fr; }
+}
+.pm-cform__submit { align-self: flex-start; margin-top: $pm-space-2; }
+
+// Confirmation
+.pm-cform__done {
+  background: var(--pm-ink-900);
+  color: var(--pm-paper);
+  border: 1px solid var(--pm-ink-900);
+  padding: clamp($pm-space-7, 5vw, $pm-space-9) clamp($pm-space-5, 4vw, $pm-space-8);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $pm-space-4;
+}
+.pm-cform__mark { font-size: 2.6rem; line-height: 1; }
+.pm-cform__donetitle {
+  @include pm-display;
+  font-weight: 500;
+  font-size: clamp(1.6rem, 1.1rem + 1.8vw, 2.6rem);
+  color: var(--pm-paper);
+  text-wrap: balance;
+  margin: 0;
+}
+.pm-cform__donep {
+  font-size: $pm-step-1;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--pm-paper) 82%, transparent);
+  margin: 0;
+}
+
+// -----------------------------------------------------------------------------
+// Salaam sign-off
+// -----------------------------------------------------------------------------
+.pm-cclose { background: var(--pm-paper); text-align: center; }
+.pm-cclose__line {
+  @include pm-display;
+  font-weight: 500;
+  font-size: clamp(1.4rem, 1rem + 1.4vw, 2.2rem);
+  color: var(--pm-ink-strong);
+  max-width: 26ch;
+  margin-inline: auto;
+  text-wrap: balance;
+}

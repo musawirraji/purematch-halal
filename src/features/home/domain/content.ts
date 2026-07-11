@@ -20,56 +20,142 @@ export interface Testimonial {
   meta: string;
 }
 
+export interface Pillar {
+  num: string;
+  title: string;
+  body: string;
+}
+
+// -----------------------------------------------------------------------------
+// Section 1 — Hero
+// -----------------------------------------------------------------------------
 export const HERO = {
   kicker: "Halal Matchmaking · Lagos & Worldwide",
-  title: "The one you'll make your nikkah with.",
-  dek: "A boutique, faith-centred matchmaking practice. Human, one-to-one, wali-friendly — from salaam to nikkah. One match at a time. Never a queue.",
+  // Split around the centred portrait plate, then a subline beneath.
+  titleA: "From salaam",
+  titleB: "to nikkah.",
+  subline: "Let’s help you find your partner, the right way.",
+  dek: "The Prophet ﷺ said: “There is nothing like marriage for two who love each other.” Pure Match Halal exists to make that journey possible — with dignity, with faith, and with the care it deserves.",
   primaryCta: "Begin Your Application",
-  secondaryCta: "How it works",
+  secondaryCta: "See How It Works",
   file: "hero-couple.jpg",
   label: "Silhouetted Muslim couple by an arched window, late Lagos light",
+  trust: ["Wali-friendly", "Human-vetted", "Discreet by design"],
 } as const;
 
-export const ABOUT_INTRO = {
-  kicker: "Our practice",
-  index: "§ 01 — The founder",
-  quote: "Matchmaking the way it was always done — one family at a time.",
+// -----------------------------------------------------------------------------
+// Section 2 — The Problem We Solve
+// -----------------------------------------------------------------------------
+export const PROBLEM = {
+  label: "Why Pure Match Halal Exists",
+  headline: "The halal options were not good enough. So we built something better.",
   body: [
-    "Pure Match Halal is not an app and not an algorithm. It is a person who sits with you, learns your intention, and introduces you — with discretion — to someone chosen with care.",
-    "You'll speak to a person, not a profile. Every introduction is made with your marriage, your deen, and your dignity at the centre.",
+    "For too many Muslims, the search for a spouse has become one of the most quietly painful parts of adult life. The options feel wrong: apps that blur Islamic boundaries, informal matchmaking that stalls before it starts, or putting yourself forward in ways that feel beneath the sanctity of what you are seeking.",
+    "Pure Match Halal was built for the Muslims who refused to accept that. The ones who know their worth, take their deen seriously, and believe that the path to nikkah should feel as intentional as the commitment itself.",
   ],
-  cta: "Read the founder's letter",
+  close: "This is that path. Alhamdulillah.",
+} as const;
+
+// -----------------------------------------------------------------------------
+// Section 3 — The Three Pillars
+// -----------------------------------------------------------------------------
+export const PILLARS_INTRO = {
+  label: "What Makes Us Different",
+  headline: "Personal. Private. Purposeful.",
+} as const;
+
+export const PILLARS: Pillar[] = [
+  {
+    num: "01",
+    title: "Personal",
+    body: "Every member has a real 1-2-1 consultation with a real person. We learn who you are — your faith, your values, your story, your expectations — before we ever begin searching. You are not a profile. You are a person created by Allah with a unique story, and we treat you as such.",
+  },
+  {
+    num: "02",
+    title: "Private",
+    body: "Your photograph, your details, your intentions — never on public display. Nothing is shared without your knowledge and consent. Your Mini Profile is approved by you before anyone sees it. When you leave, everything is deleted.",
+  },
+  {
+    num: "03",
+    title: "Purposeful",
+    body: "We introduce one match at a time. Not a list. Not a batch. One carefully considered introduction, with our full attention, so that every connection is given a real chance to grow.",
+  },
+];
+
+// -----------------------------------------------------------------------------
+// Section 5 — Social Proof (heading for the testimonials block)
+// -----------------------------------------------------------------------------
+export const SOCIAL = {
+  kicker: "Real Stories",
+  // Kept short so the char-flip heading + quote cards fit inside one stack card
+  // (a long headline pushed the quotes below the fold and the next card covered
+  // them). The fuller sentiment lives in the sub-line.
+  head: "Journeys we’ve walked.",
+  sub: "Some we’ve had the honour of walking alongside.",
+} as const;
+
+export const TESTIMONIALS: Testimonial[] = [
+  {
+    quote:
+      "We never expected to find each other this way, but Pure Match Halal made the process feel safe, respected, and truly halal. We are grateful every single day. Alhamdulillah.",
+    names: "A. & I.",
+    meta: "Matched March 2025",
+  },
+  {
+    quote:
+      "From the very first conversation, I knew this was different. There was no pressure, no awkwardness — just a thoughtful, careful process that led me to my husband.",
+    names: "S. & Y.",
+    meta: "Matched 2024",
+  },
+];
+
+// -----------------------------------------------------------------------------
+// Section 6 — Free Call Banner
+// -----------------------------------------------------------------------------
+export const FREE_CALL = {
+  kicker: "No payment · No pressure",
+  headline: "Not ready to commit? That is completely fine.",
+  body: "We offer introductory calls with no payment, no pressure, and no obligation. Just an honest conversation about how Pure Match Halal works — so that you can make the right decision for yourself, in your own time.",
+  primaryCta: "Book a Free Call",
+  secondaryCta: "Send Us a Message",
+} as const;
+
+// -----------------------------------------------------------------------------
+// Section 7 — About Teaser
+// -----------------------------------------------------------------------------
+export const ABOUT_INTRO = {
+  kicker: "Who We Are",
+  index: "§ 01 — The founder",
+  quote: "Built by someone who saw the gap and refused to ignore it.",
+  body: [
+    "Pure Match Halal was founded by Hoyin Oba, a Muslim woman who spent years watching serious, marriage-ready Muslims cycle through options that consistently let them down.",
+    "She built the service that should have already existed. Personal. Dignified. Fully halal. Rooted in genuine care for the Muslim community she serves.",
+  ],
+  cta: "Read Our Story",
   signature: "Hoyin Oba",
   role: "Founder · Pure Match Halal",
   principles: ["One match at a time", "Wali-friendly", "Discreet by design"],
   file: "founder-portrait.jpg",
-  label: "Founder portrait — Hoyin Oba (placeholder until shoot)",
+  label: "Founder portrait — Hoyin Oba",
 } as const;
 
-export const HOW_IT_WORKS: Step[] = [
-  {
-    num: "01",
-    title: "Get in touch",
-    body: "Begin your application. Tell us who you are and what you are looking for — in confidence.",
-    file: "how-01-register.jpg",
-    label: "Fountain pen on cream paper, prayer beads, morning light",
-  },
-  {
-    num: "02",
-    title: "A one-to-one consultation",
-    body: "We speak properly — about your intention, your values, your family. This is a conversation, not a questionnaire.",
-    file: "how-02-consult.jpg",
-    label: "Video call on a stack of books, warm bokeh living room",
-  },
-  {
-    num: "03",
-    title: "One match at a time",
-    body: "When there is someone considered right, we introduce you — the wali-friendly, halal way. Never a queue.",
-    file: "how-03-match.jpg",
-    label: "Two teacups set for two, soft interior",
-  },
-];
+// -----------------------------------------------------------------------------
+// Section 8 — Final CTA
+// -----------------------------------------------------------------------------
+export const CTA_BANNER = {
+  kicker: "Your nikkah starts here",
+  index: "§ — The invitation",
+  headline: "Your nikkah starts with one step. Are you ready to take it?",
+  body: "Allah does not change the condition of a people until they change what is within themselves. You have already decided you are ready — let us help you move forward.",
+  cta: "Begin Your Application",
+  secondary: "Talk to Us First",
+  trust: ["Wali-friendly", "Human-vetted", "Discreet by design"],
+} as const;
 
+// -----------------------------------------------------------------------------
+// Retained for the standalone privacy cinematic (TrustScene) — kept out of the
+// home composition for now; reusable on /membership + /about privacy sections.
+// -----------------------------------------------------------------------------
 export const TRUST: TrustFeature[] = [
   {
     icon: "shield",
@@ -92,35 +178,3 @@ export const TRUST: TrustFeature[] = [
     body: "When your search ends, your information leaves with you. Nothing lingers.",
   },
 ];
-
-export const TESTIMONIALS: Testimonial[] = [
-  {
-    quote:
-      "We were introduced with such care that our families felt at ease from the very first conversation. Six months later, we made our nikkah.",
-    names: "A. & I.",
-    meta: "Matched March 2025 · Lagos",
-  },
-  {
-    quote:
-      "I was tired of apps that made marriage feel like shopping. Here, someone actually understood what I meant by the right person.",
-    names: "S. & Y.",
-    meta: "Matched 2024 · London & Abuja",
-  },
-];
-
-export const EVENT_TEASER = {
-  kicker: "HOD Live · in partnership with Half Deen",
-  headline: "400 applied. 80 were chosen.",
-  body: "A considered, halal gathering — equal men and women, a private location, and not a single speed-dating buzzer. Our next cohort is forming now.",
-  cta: "Join the waitlist",
-} as const;
-
-export const CTA_BANNER = {
-  kicker: "Complete half your deen",
-  index: "§ — The invitation",
-  headline: "Let's introduce you to the one.",
-  body: "One considered introduction at a time — human, wali-friendly, discreet. When you're ready, so are we.",
-  cta: "Begin Your Application",
-  secondary: "See how it works",
-  trust: ["Wali-friendly", "Human-vetted", "Discreet by design"],
-} as const;

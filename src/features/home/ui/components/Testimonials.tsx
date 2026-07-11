@@ -1,19 +1,19 @@
 "use client";
 
-import { useRef } from "react";
+import { Fragment, useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { mobileReveal } from "@shared/lib/scrollReveal";
-import { TESTIMONIALS } from "../../domain/content";
+import { TESTIMONIALS, SOCIAL } from "../../domain/content";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 // Daylight S6 — a giant heading whose characters flip in/out on the Y axis in
 // 3D (perspective + transform-origin 100% 50%), with the story cards layered
-// over it. Here it flips IN as the card arrives (the stacking card handles the
-// leaving). Gated lg + motion-safe; static heading + cards below.
-const HEAD = "Kind words.";
+// below it. It flips IN as the section arrives. Gated lg + motion-safe; static
+// heading + cards below. Heading + cards are sized to fit one 100vh stack card.
+const HEAD = SOCIAL.head;
 
 export function Testimonials() {
   const root = useRef<HTMLElement>(null);
@@ -24,7 +24,7 @@ export function Testimonials() {
 
       // Mobile: no char-flip — reveal the heading and cards in view.
       mm.add("(max-width: 1023px) and (prefers-reduced-motion: no-preference)", () =>
-        mobileReveal(root.current, ".pm-testi__head, .pm-testi__card", { stagger: 0.12 })
+        mobileReveal(root.current, ".pm-testi__head, .pm-testi__sub, .pm-testi__card", { stagger: 0.12 })
       );
 
       mm.add("(min-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
@@ -51,14 +51,24 @@ export function Testimonials() {
 
   return (
     <section className="pm-section pm-testi" ref={root}>
-      <p className="pm-eyebrow pm-testi__kicker">Success stories</p>
-      <h2 className="pm-testi__head" aria-label="Kind words">
-        {[...HEAD].map((ch, i) => (
-          <span className="pm-testi__char" key={i} aria-hidden="true">
-            {ch === " " ? " " : ch}
-          </span>
+      <p className="pm-eyebrow pm-testi__kicker">{SOCIAL.kicker}</p>
+      {/* Per-word wrappers so the heading only ever breaks at spaces; each
+          character still flips individually (GSAP targets .pm-testi__char). */}
+      <h2 className="pm-testi__head" aria-label={SOCIAL.head}>
+        {HEAD.split(" ").map((word, w, arr) => (
+          <Fragment key={w}>
+            <span className="pm-testi__word" aria-hidden="true">
+              {[...word].map((ch, i) => (
+                <span className="pm-testi__char" key={i}>
+                  {ch}
+                </span>
+              ))}
+            </span>
+            {w < arr.length - 1 ? " " : null}
+          </Fragment>
         ))}
       </h2>
+      <p className="pm-testi__sub">{SOCIAL.sub}</p>
 
       <div className="pm-testi__cards">
         {TESTIMONIALS.map((t, i) => (

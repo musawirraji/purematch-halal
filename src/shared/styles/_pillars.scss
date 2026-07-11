@@ -1,0 +1,86 @@
+@use "tokens" as *;
+
+// =============================================================================
+// PILLARS — "Personal. Private. Purposeful." (Home section 3)
+// Three numbered pillars on a hairline grid; each column lifts and its number
+// turns pink on hover. Stacks to one column on mobile.
+// =============================================================================
+.pm-pillars {
+  background: var(--pm-bg-alt);
+}
+.pm-pillars__inner {
+  padding-inline: var(--pm-edge);
+}
+.pm-pillars__head {
+  max-width: 40rem;
+  margin-bottom: clamp($pm-space-7, 5vw, $pm-space-9);
+}
+.pm-pillars__label {
+  display: block;
+  color: var(--pm-accent);
+}
+.pm-pillars__title {
+  @include pm-display;
+  font-size: clamp(2.4rem, 1.4rem + 3.4vw, 4.8rem);
+  color: var(--pm-ink-strong);
+  margin-top: $pm-space-4;
+}
+
+.pm-pillars__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  border-top: 1px solid var(--pm-line);
+  @include bp(md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.pm-pillars__item {
+  padding-block: $pm-space-6;
+  border-bottom: 1px solid var(--pm-line);
+  transition: transform $pm-dur $pm-ease;
+  @include bp(md) {
+    padding: $pm-space-7 clamp(1.5rem, 2.4vw, 2.75rem) $pm-space-7 0;
+    border-bottom: 0;
+    border-right: 1px solid var(--pm-line);
+    &:last-child {
+      border-right: 0;
+      padding-right: 0;
+    }
+    &:not(:first-child) {
+      padding-left: clamp(1.5rem, 2.4vw, 2.75rem);
+    }
+  }
+  @include bp(lg) {
+    &:hover {
+      transform: translateY(-6px);
+    }
+  }
+  &:hover .pm-pillars__num {
+    color: var(--pm-accent);
+  }
+}
+.pm-pillars__num {
+  display: block;
+  font-family: var(--pm-font-body);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--pm-ink-300);
+  margin-bottom: $pm-space-5;
+  transition: color $pm-dur-fast $pm-ease;
+}
+.pm-pillars__name {
+  @include pm-display;
+  font-size: $pm-step-3;
+  color: var(--pm-ink-strong);
+  margin-bottom: $pm-space-3;
+}
+.pm-pillars__body {
+  font-size: $pm-step-0;
+  line-height: 1.62;
+  color: var(--pm-ink-body);
+  max-width: 42ch;
+}

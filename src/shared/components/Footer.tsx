@@ -56,8 +56,8 @@ export function Footer() {
                 {r.label}
               </Link>
             ))}
-            <Link href={route("policy")} className="pm-footer__link">
-              Membership
+            <Link href={route("register")} className="pm-footer__link">
+              Begin Your Application
             </Link>
           </nav>
 

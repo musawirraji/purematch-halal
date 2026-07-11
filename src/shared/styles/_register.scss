@@ -1,3 +1,166 @@
 @use "tokens" as *;
 
-// register page styles (filled during feature build)
+// =============================================================================
+// REGISTER — before-you-begin, the 3-step application form, and the confirmation.
+// Field controls come from _forms.scss; pay cards reuse pm-pay (_membership).
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Before You Begin — three numbered notes
+// -----------------------------------------------------------------------------
+.pm-regbefore { background: var(--pm-paper); }
+.pm-regbefore__inner { padding-inline: var(--pm-edge); max-width: 62rem; margin-inline: auto; }
+.pm-regbefore__kicker { display: block; color: var(--pm-accent); margin-bottom: $pm-space-3; }
+.pm-regbefore__heading {
+  @include pm-display;
+  font-weight: 500;
+  font-size: clamp(1.8rem, 1.1rem + 2.2vw, 3rem);
+  color: var(--pm-ink-strong);
+  margin: 0 0 $pm-space-7;
+}
+.pm-regbefore__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: $pm-space-6;
+  grid-template-columns: 1fr;
+  @include bp(md) { grid-template-columns: repeat(3, 1fr); }
+}
+.pm-regbefore__item { border-top: 2px solid var(--pm-ink-900); padding-top: $pm-space-4; }
+.pm-regbefore__n {
+  display: block;
+  font-family: var(--pm-font-body);
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  color: var(--pm-accent);
+  margin-bottom: $pm-space-3;
+}
+.pm-regbefore__title {
+  font-family: var(--pm-font-display);
+  font-weight: 600;
+  font-size: $pm-step-1;
+  color: var(--pm-ink-strong);
+  margin-bottom: $pm-space-2;
+}
+.pm-regbefore__body { font-size: $pm-step-0; line-height: 1.55; color: var(--pm-ink-body); }
+
+// Compact price strip under the pay cards (register only)
+.pm-pay__prices { display: flex; flex-wrap: wrap; gap: clamp($pm-space-6, 5vw, $pm-space-9); margin-top: $pm-space-7; }
+.pm-pay__price { display: flex; flex-direction: column; gap: 2px; }
+.pm-pay__price span { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pm-ink-muted); }
+.pm-pay__price strong { @include pm-display; font-weight: 600; font-size: $pm-step-3; color: var(--pm-ink-strong); }
+
+// -----------------------------------------------------------------------------
+// The application form
+// -----------------------------------------------------------------------------
+.pm-reg { background: var(--pm-bg-alt); scroll-margin-top: calc(var(--pm-header-h) + #{$pm-space-5}); }
+.pm-reg__inner { padding-inline: var(--pm-edge); max-width: 52rem; margin-inline: auto; }
+.pm-reg__kicker { display: block; color: var(--pm-accent); margin-bottom: $pm-space-3; }
+.pm-reg__heading {
+  @include pm-display;
+  font-weight: 500;
+  font-size: clamp(1.8rem, 1.1rem + 2.2vw, 3rem);
+  color: var(--pm-ink-strong);
+  margin: 0 0 $pm-space-7;
+}
+
+// progress rail
+.pm-reg__progress { display: flex; gap: $pm-space-3; margin-bottom: $pm-space-7; }
+.pm-reg__pstep {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  gap: $pm-space-2;
+  padding-top: $pm-space-3;
+  border-top: 2px solid var(--pm-line);
+  color: var(--pm-ink-muted);
+  transition: border-color $pm-dur $pm-ease, color $pm-dur $pm-ease;
+}
+.pm-reg__pstep.is-active { border-color: var(--pm-accent); color: var(--pm-ink-strong); }
+.pm-reg__pstep.is-done { border-color: var(--pm-ink-900); color: var(--pm-ink-body); }
+.pm-reg__pnum { font-family: var(--pm-font-body); font-weight: 600; font-size: 0.8rem; letter-spacing: 0.1em; }
+.pm-reg__plabel { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.3; }
+@media (max-width: 34rem) { .pm-reg__plabel { display: none; } }
+
+.pm-reg__form {
+  background: var(--pm-surface);
+  border: 1px solid var(--pm-hairline);
+  padding: clamp($pm-space-5, 4vw, $pm-space-8);
+}
+.pm-reg__stepcount { @include pm-eyebrow; color: var(--pm-accent); display: block; margin-bottom: $pm-space-2; }
+.pm-reg__intro { font-size: $pm-step-1; line-height: 1.5; color: var(--pm-ink-body); margin-bottom: $pm-space-6; max-width: 48ch; }
+
+.pm-reg__grid {
+  display: grid;
+  gap: $pm-space-5;
+  grid-template-columns: 1fr;
+  @include bp(md) { grid-template-columns: 1fr 1fr; }
+}
+.pm-reg__stack { display: flex; flex-direction: column; gap: $pm-space-6; }
+.pm-reg__count { font-size: $pm-step--1; color: var(--pm-ink-muted); align-self: flex-end; }
+.pm-reg__count.is-met { color: var(--pm-accent); font-weight: 600; }
+.pm-reg__nav { display: flex; justify-content: space-between; align-items: center; gap: $pm-space-4; margin-top: $pm-space-7; }
+.pm-reg__termslink { color: var(--pm-accent); text-decoration: underline; text-underline-offset: 2px; }
+
+// segmented control (gender / marital / membership)
+.pm-seg {
+  display: inline-flex;
+  flex-wrap: wrap;
+  border: 1px solid var(--pm-hairline);
+  background: var(--pm-surface);
+}
+.pm-seg--wide { display: grid; grid-template-columns: 1fr 1fr; width: 100%; }
+.pm-seg__opt { position: relative; display: flex; }
+.pm-seg__opt input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.pm-seg__opt span {
+  flex: 1;
+  padding: 0.8em 1.4em;
+  font-size: 0.85rem;
+  white-space: nowrap; // segmented options must not wrap
+  text-align: center;
+  color: var(--pm-ink-body);
+  border-right: 1px solid var(--pm-hairline);
+  transition: background-color $pm-dur-fast $pm-ease, color $pm-dur-fast $pm-ease;
+}
+.pm-seg__opt:last-child span { border-right: 0; }
+.pm-seg__opt input:checked + span { background: var(--pm-ink-900); color: var(--pm-paper); }
+.pm-seg__opt input:focus-visible + span { box-shadow: inset 0 0 0 2px var(--pm-accent); }
+
+// -----------------------------------------------------------------------------
+// Confirmation (post-submit)
+// -----------------------------------------------------------------------------
+.pm-regdone { background: var(--pm-ink-900); color: var(--pm-paper); scroll-margin-top: calc(var(--pm-header-h) + #{$pm-space-5}); }
+.pm-regdone__inner {
+  padding-inline: var(--pm-edge);
+  max-width: 46rem;
+  margin-inline: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $pm-space-5;
+}
+.pm-regdone__mark { font-size: 3rem; line-height: 1; }
+.pm-regdone__title {
+  @include pm-display;
+  font-weight: 500;
+  font-size: clamp(1.8rem, 1.1rem + 2.4vw, 3rem);
+  color: var(--pm-paper);
+  text-wrap: balance;
+  margin: 0;
+}
+.pm-regdone__p {
+  font-size: $pm-step-1;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--pm-paper) 82%, transparent);
+  max-width: 42rem;
+  margin: 0;
+}
+.pm-regdone__btn {
+  --_bg: transparent;
+  --_fg: var(--pm-paper);
+  --_bd: color-mix(in srgb, var(--pm-paper) 50%, transparent);
+  margin-top: $pm-space-4;
+}
