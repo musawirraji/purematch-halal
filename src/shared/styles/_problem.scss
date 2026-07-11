@@ -1,0 +1,69 @@
+@use "tokens" as *;
+
+// =============================================================================
+// PROBLEM — "Why Pure Match Halal Exists" (Home section 2)
+// A ruled label rail on the left (sticky at lg), an oversized headline and
+// measured prose on the right, closing on an accented line of tasbih.
+// =============================================================================
+.pm-problem {
+  background: var(--pm-bg);
+}
+.pm-problem__inner {
+  padding-inline: var(--pm-edge);
+  display: grid;
+  gap: $pm-space-6;
+  grid-template-columns: 1fr;
+  @include bp(lg) {
+    grid-template-columns: 0.32fr 1fr;
+    gap: clamp($pm-space-7, 6vw, $pm-space-10);
+    align-items: start;
+  }
+}
+
+.pm-problem__aside {
+  @include bp(lg) {
+    position: sticky;
+    top: calc(var(--pm-header-h) + #{$pm-space-7});
+  }
+}
+.pm-problem__label {
+  display: block;
+  color: var(--pm-accent);
+}
+.pm-problem__rule {
+  display: block;
+  margin-top: $pm-space-4;
+  width: 3rem;
+  height: 1px;
+  background: var(--pm-accent);
+}
+
+.pm-problem__body {
+  display: flex;
+  flex-direction: column;
+  gap: $pm-space-5;
+  max-width: 54ch;
+}
+.pm-problem__head {
+  @include pm-display;
+  font-size: clamp(2rem, 1.1rem + 3vw, 3.9rem);
+  color: var(--pm-ink-strong);
+  margin: 0 0 $pm-space-2;
+}
+.pm-problem__p {
+  font-size: $pm-step-1;
+  line-height: 1.62;
+  color: var(--pm-ink-body);
+}
+.pm-problem__p--lede {
+  color: var(--pm-ink-strong);
+}
+.pm-problem__close {
+  font-family: var(--pm-font-display);
+  font-weight: 600;
+  font-size: clamp(1.5rem, 1rem + 1.7vw, 2.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--pm-accent);
+  margin-top: $pm-space-3;
+}

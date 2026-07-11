@@ -1,3 +1,65 @@
 @use "tokens" as *;
 
-// faqs page styles (filled during feature build)
+// =============================================================================
+// FAQs — accessible <details> accordion. Plus → minus on open; answer fades in.
+// =============================================================================
+.pm-faqs { background: var(--pm-paper); }
+.pm-faqs__inner {
+  padding-inline: var(--pm-edge);
+  max-width: 54rem;
+  margin-inline: auto;
+  border-top: 1px solid var(--pm-line);
+}
+.pm-faq { border-bottom: 1px solid var(--pm-line); }
+.pm-faq__q {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $pm-space-5;
+  padding-block: clamp($pm-space-4, 2.4vw, $pm-space-5);
+  font-family: var(--pm-font-display);
+  font-weight: 500;
+  font-size: clamp(1.15rem, 0.95rem + 0.9vw, 1.6rem);
+  line-height: 1.25;
+  color: var(--pm-ink-strong);
+  transition: color $pm-dur-fast $pm-ease;
+  &::-webkit-details-marker { display: none; }
+  &:hover { color: var(--pm-accent); }
+}
+.pm-faq__qtext { text-wrap: balance; }
+.pm-faq__icon {
+  position: relative;
+  flex: 0 0 auto;
+  width: 1.1rem;
+  height: 1.1rem;
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--pm-accent);
+    transition: transform $pm-dur $pm-ease, opacity $pm-dur $pm-ease;
+  }
+  &::before { width: 1.1rem; height: 2px; } // horizontal bar
+  &::after { width: 2px; height: 1.1rem; } // vertical bar (fades out on open → minus)
+}
+.pm-faq[open] .pm-faq__icon::after { transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
+.pm-faq__a { padding-bottom: clamp($pm-space-4, 2.4vw, $pm-space-5); max-width: 46rem; }
+.pm-faq[open] .pm-faq__a { animation: pm-faq-in 0.45s $pm-ease; }
+.pm-faq__p {
+  font-size: $pm-step-0;
+  line-height: 1.62;
+  color: var(--pm-ink-body);
+  & + & { margin-top: $pm-space-3; }
+}
+@keyframes pm-faq-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: none; }
+}
+@include pm-reduce-motion {
+  .pm-faq[open] .pm-faq__a { animation: none; }
+}

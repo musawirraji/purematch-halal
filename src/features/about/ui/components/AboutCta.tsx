@@ -4,5 +4,5 @@ import { ABOUT } from "../../domain/content";
 
 // About closer — the shared CTA panel with the About copy.
 export function AboutCta() {
-  return <CtaPanel content={{ ...ABOUT.cta, ctaHref: route("register"), secondaryHref: route("services") }} />;
+  return <CtaPanel content={{ ...ABOUT.cta, ctaHref: route("register"), secondaryHref: route("contact") }} />;
 }

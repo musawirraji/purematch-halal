@@ -1,63 +1,58 @@
 // Services content — the 6-step journey. Pure data, no I/O.
+// Order + copy follow the brief's homepage "Journey" sequence.
 
 export interface JourneyStep {
   num: string;
   title: string;
   body: string;
   file: string;
-  /** step 6 gets the dua treatment */
-  dua?: boolean;
 }
 
 export const SERVICES_INTRO = {
-  kicker: "The journey",
-  title: "A considered journey, not an endless swipe.",
-  dek: "Six steps, taken with care — from your first application to the words we most hope to say: matchmade in heaven, in sha Allah.",
+  kicker: "The Process",
+  title: "Few steps. One outcome, in sha Allah.",
+  dek: "A considered journey, taken with care — from your first application to a nikkah made with barakah.",
 } as const;
 
 export const JOURNEY: JourneyStep[] = [
   {
     num: "01",
-    title: "Registration",
-    body: "Begin your application in confidence. Tell us who you are, your intention, and what matters to you in a spouse.",
+    title: "You Apply",
+    body: "Fill out your registration form and submit your payment. This is the first step in a process that takes your search for a spouse seriously.",
     file: "journey-1.jpg",
   },
   {
     num: "02",
-    title: "Initial contact",
-    body: "We reach out personally — a warm first conversation, not an automated reply. You speak to a person from the very start.",
+    title: "We Reach Out",
+    body: "We review your application and contact you personally for a warm, unhurried conversation. Not an automated email. A real person, from day one.",
     file: "journey-2.jpg",
   },
   {
     num: "03",
-    title: "Finding your match",
-    body: "We search our considered network by hand, weighing deen, values and family — never an algorithm, never a queue.",
-    file: "journey-3.jpg",
-  },
-  {
-    num: "04",
-    title: "One-to-one consultation",
-    body: "We sit with you properly — about intention, expectations and your wali. This is a conversation, not a questionnaire.",
+    title: "Your Consultation",
+    body: "We sit with you properly — a 1-2-1 video call where we get to know your deen, your values, your expectations, and your wali. This is the foundation on which everything else is built.",
     file: "journey-4.jpg",
   },
   {
+    num: "04",
+    title: "We Search",
+    body: "We go to work. By hand, not algorithm — searching our network for someone whose faith, values, personality, and family feel like a genuine match for yours.",
+    file: "journey-3.jpg",
+  },
+  {
     num: "05",
-    title: "Keeping in touch",
-    body: "When there is mutual consent we introduce you — the wali-friendly, halal way — and stay close through every step.",
+    title: "The Introduction",
+    body: "We share both Mini Profiles. If both sides are willing to move forward, contact details are exchanged — respectfully, with wali involvement, the halal way.",
     file: "journey-5.jpg",
   },
   {
     num: "06",
-    title: "Matchmade in heaven",
-    body: "In sha Allah, a nikkah made with barakah. Ameen.",
+    title: "We Stay Close",
+    body: "We check in every week. If it does not work out, we go again — at no extra cost, as many times as it takes within your membership. You are never left on your own.",
     file: "journey-6.jpg",
-    dua: true,
   },
 ];
 
 export const SERVICES_CTA = {
-  kicker: "Complete half your deen",
-  headline: "Begin your application.",
-  body: "One considered introduction at a time. Never a queue. Begin the journey to your nikkah.",
-  cta: "Begin Your Application",
+  label: "See the Full Process & Pricing",
 } as const;

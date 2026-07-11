@@ -9,10 +9,13 @@ export const SITE = {
     "A boutique faith-centred matchmaking practice. Human, one-to-one, wali-friendly — for Muslims seeking marriage in Lagos and across the diaspora.",
   location: "Lagos & Worldwide",
   email: "Admin@purematchhalal.com",
-  // TODO(oba): confirm real public phone number for Events / Contact
-  phone: "+234 000 000 0000",
-  whatsapp: "https://wa.me/2340000000000",
-  instagram: "https://www.instagram.com/purematchhalal",
+  // TODO(oba): WhatsApp number not yet confirmed. `whatsapp` points at wa.me
+  // once the number lands; until then CTAs fall back to email where sensible.
+  phone: "",
+  whatsappConfirmed: false,
+  whatsapp: "https://wa.me/",
+  instagram: "https://www.instagram.com/purematch01",
+  instagramHandle: "@purematch01",
   hours: [
     { day: "Mon – Fri", time: "9:00 – 18:00 WAT" },
     { day: "Saturday", time: "10:00 – 16:00 WAT" },

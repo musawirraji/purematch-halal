@@ -8,8 +8,8 @@ import { HERO } from "../../domain/content";
 // Full-bleed editorial hero (Keeper structure): thin frame to the viewport
 // edges, a huge headline split around a centred portrait plate. The headline
 // TYPES in character-by-character — left block first, then the right.
-const LINE_A = "The one you’ll";
-const LINE_B = "make your nikkah with.";
+const LINE_A = HERO.titleA;
+const LINE_B = HERO.titleB;
 const STEP = 46; // ms per character
 const GAP = 6; // characters of pause between the two blocks
 
@@ -56,7 +56,7 @@ export function Hero() {
       </div>
 
       <div className="pm-hero__stage">
-        <h1 className="pm-hero__title" aria-label={HERO.title}>
+        <h1 className="pm-hero__title" aria-label={`${LINE_A} ${LINE_B} ${HERO.subline}`}>
           <span className="pm-hero__line pm-hero__line--a" aria-hidden="true">
             <Typed text={LINE_A} offset={0} />
           </span>
@@ -67,6 +67,9 @@ export function Hero() {
             <Typed text={LINE_B} offset={LINE_A.length + GAP} />
           </span>
         </h1>
+        <p className="pm-hero__subline" aria-hidden="true">
+          {HERO.subline}
+        </p>
       </div>
 
       <div className="pm-hero__foot">
@@ -78,14 +81,14 @@ export function Hero() {
             <Link href={route("register")} className="pm-btn">
               {HERO.primaryCta}
             </Link>
-            <Link href={route("services")} className="pm-btn pm-btn--link">
+            <Link href={route("membership")} className="pm-btn pm-btn--link">
               {HERO.secondaryCta}
             </Link>
           </div>
           <ul className="pm-hero__trust">
-            <li>Wali-friendly</li>
-            <li>Human-vetted</li>
-            <li>Discreet by design</li>
+            {HERO.trust.map((t) => (
+              <li key={t}>{t}</li>
+            ))}
           </ul>
         </div>
       </div>

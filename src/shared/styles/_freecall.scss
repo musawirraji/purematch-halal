@@ -1,0 +1,53 @@
+@use "tokens" as *;
+
+// =============================================================================
+// FREE CALL — the reassurance banner (Home section 6)
+// A calm bordered invitation on the surface tone. Lives as a stack card, so it
+// fills the viewport at lg (a deliberate "pause" beat before the finale).
+// =============================================================================
+.pm-freecall {
+  background: var(--pm-bg);
+  text-align: center;
+}
+.pm-freecall__panel {
+  position: relative;
+  width: min(100%, 60rem);
+  margin-inline: auto;
+  padding: clamp($pm-space-7, 6vw, $pm-space-10) clamp($pm-space-5, 5vw, $pm-space-9);
+  background: var(--pm-surface);
+  border: 1px solid var(--pm-hairline);
+  box-shadow: $pm-shadow;
+}
+// subtle inner frame (the editorial double-rule)
+.pm-freecall__frame {
+  position: absolute;
+  inset: 9px;
+  border: 1px solid var(--pm-line);
+  pointer-events: none;
+}
+.pm-freecall__kicker {
+  display: block;
+  color: var(--pm-accent);
+  margin-bottom: $pm-space-5;
+}
+.pm-freecall__head {
+  @include pm-display;
+  font-size: clamp(1.9rem, 1.1rem + 2.6vw, 3.4rem);
+  color: var(--pm-ink-strong);
+  margin: 0 auto $pm-space-4;
+  max-width: 20ch;
+}
+.pm-freecall__body {
+  font-size: $pm-step-1;
+  line-height: 1.6;
+  color: var(--pm-ink-body);
+  max-width: 48ch;
+  margin: 0 auto $pm-space-6;
+}
+.pm-freecall__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $pm-space-5;
+  align-items: center;
+  justify-content: center;
+}

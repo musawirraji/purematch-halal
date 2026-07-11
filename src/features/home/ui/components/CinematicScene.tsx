@@ -142,7 +142,7 @@ export function CinematicScene() {
           <span className="pm-cine__badge-dot" /> In good company · human-vetted
         </div>
 
-        <Link href={route("gallery")} className="pm-cine__card">
+        <Link href={route("about")} className="pm-cine__card">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/img/how-03-match.jpg" alt="" className="pm-cine__card-img" />
           <span className="pm-cine__card-label">Take a peek</span>

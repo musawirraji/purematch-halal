@@ -59,6 +59,36 @@
 }
 .pm-journey__body--dua { text-align: center; color: var(--pm-ink-muted); max-width: 28ch; }
 
+// Intro panel — opens the track ("The Process")
+.pm-journey__panel--intro { gap: $pm-space-4; }
+.pm-journey__introkicker { color: var(--pm-accent); }
+.pm-journey__introtitle {
+  @include pm-display;
+  font-size: clamp(2.2rem, 1.3rem + 3vw, 3.8rem);
+  color: var(--pm-ink-strong);
+  max-width: 14ch;
+}
+.pm-journey__introdek {
+  font-size: $pm-step-0;
+  line-height: 1.6;
+  color: var(--pm-ink-body);
+  max-width: 34ch;
+}
+
+// CTA panel — closes the track
+.pm-journey__panel--cta {
+  gap: $pm-space-5;
+  align-items: flex-start;
+  justify-content: center;
+}
+.pm-journey__ctalabel {
+  @include pm-display;
+  font-weight: 500;
+  font-size: clamp(1.8rem, 1.1rem + 2.2vw, 3rem);
+  color: var(--pm-ink-strong);
+  max-width: 12ch;
+}
+
 // -----------------------------------------------------------------------------
 // Desktop — pinned horizontal scroller
 // -----------------------------------------------------------------------------
@@ -91,4 +121,7 @@
   .pm-journey__panel:nth-child(even) { align-self: flex-start; margin-top: 8vh; }
   .pm-journey__panel:nth-child(odd) { align-self: flex-end; margin-bottom: 8vh; }
   .pm-journey__panel--dua { align-self: center !important; margin: 0 !important; }
+  // the text panels sit centred, not nudged like the step cards
+  .pm-journey__panel--intro,
+  .pm-journey__panel--cta { align-self: center !important; margin: 0 !important; }
 }

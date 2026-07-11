@@ -318,7 +318,8 @@
   background: var(--pm-ink-900);
   color: var(--pm-paper);
   padding-block: $pm-space-9 $pm-space-6;
-  margin-top: $pm-space-9;
+  // No top margin: the footer always follows a full-bleed dark CTA panel, so a
+  // paper margin-gap between the two dark sections read as a bug. Flush instead.
 
   // full-bleed content (no max-width container)
   &__inner { position: relative; z-index: 2; padding-inline: var(--pm-edge); }

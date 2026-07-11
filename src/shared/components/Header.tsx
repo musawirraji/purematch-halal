@@ -34,7 +34,7 @@ export function Header() {
           <Logo />
           <div className="pm-header__actions">
             <Link href={route("register")} className="pm-btn pm-btn--sm pm-header__cta">
-              Register
+              Begin Your Application
             </Link>
             <button
               className={`pm-burger ${open ? "is-open" : ""}`}
@@ -78,11 +78,8 @@ export function Header() {
               ))}
             </nav>
             <nav className="pm-menu__col" aria-label="Menu secondary">
-              <Link href={route("policy")} className="pm-menu__link" onClick={() => setOpen(false)} style={{ transitionDelay: `${open ? 300 : 0}ms` }}>
-                Membership
-              </Link>
               <Link href={route("register")} className="pm-menu__link pm-menu__link--accent" onClick={() => setOpen(false)} style={{ transitionDelay: `${open ? 340 : 0}ms` }}>
-                Begin Application
+                Begin Your Application
               </Link>
               <a href={`mailto:${SITE.email}`} className="pm-menu__contact" style={{ transitionDelay: `${open ? 380 : 0}ms` }}>
                 <IconMail className="pm-menu__ci" /> {SITE.email}
